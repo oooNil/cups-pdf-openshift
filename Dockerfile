@@ -1,6 +1,8 @@
 ### Compile Stage
 FROM quay.io/centos/centos:stream8
 
+RUN dnf clean all && rm -r /var/cache/dnf  && dnf upgrade -y && dnf update -y 
+
 RUN dnf -y install gcc cups cups-libs cups-devel ghostscript glibc
 
 # Create user for compiling under it
