@@ -79,13 +79,13 @@ do
 done
 echo "########################################"
 
-tail -n 1000 -f /var/log/cups/access_log &
-tail -n 1000 -f /var/log/cups/error_log &
-tail -n 1000 -f /var/log/cups/page_log &
+tail -n 1000 -f /var/log/cups/access_log | jq  --raw-input . &
+tail -n 1000 -f /var/log/cups/error_log | jq  --raw-input . &
+tail -n 1000 -f /var/log/cups/page_log | jq  --raw-input . &
 for cupspdf_instance in $(env | grep -e "CUPS_PDF_INSTANCE[0-9]\+=" ) ;
 do
     NAME="${cupspdf_instance#*=}"
-    tail -n 1000 -f "/var/log/cups/cups-pdf-${NAME}_log" &
+    tail -n 1000 -f "/var/log/cups/cups-pdf-${NAME}_log" | jq  --raw-input . &
 done
 
 while [ 1 == 1 ] ;
