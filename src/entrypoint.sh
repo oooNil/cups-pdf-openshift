@@ -79,7 +79,7 @@ do
 done
 echo "########################################"
 
-tail -n 1000 -f /var/log/cups/access_log | jq  --raw-input . | tee &
+tail -n 1000 -f /var/log/cups/access_log | jq  --raw-input . | jq &
 #tail -n 1000 -f /var/log/cups/error_log | jq  --raw-input . &
 cat /var/log/cups/error_log | jq  --raw-input . &
 #tail -n 1000 -f /var/log/cups/page_log  &
