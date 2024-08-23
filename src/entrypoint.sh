@@ -2,9 +2,9 @@
 # Catch termination of container and exit script
 trap "exit 0" SIGTERM SIGINT
 
-echo "########################################"
-echo "#############   CONFIG   ###############"
-echo "########################################"
+echo "########################################" | jq  --raw-input .
+echo "#############   CONFIG   ###############" | jq  --raw-input .
+echo "########################################" | jq  --raw-input .
 echo "User and Group: $(id -u):$(id -g)"
 
 
@@ -79,7 +79,7 @@ do
 done
 echo "########################################"
 
-tail -n 1000 -f /var/log/cups/access_log | jq . &
+tail -n 1000 -f /var/log/cups/access_log | jq  --raw-input . &
 tail -n 1000 -f /var/log/cups/error_log | jq  --raw-input . &
 tail -n 1000 -f /var/log/cups/page_log | jq  --raw-input . &
 for cupspdf_instance in $(env | grep -e "CUPS_PDF_INSTANCE[0-9]\+=" ) ;
