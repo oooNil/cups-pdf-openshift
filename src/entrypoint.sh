@@ -80,11 +80,9 @@ done
 echo "########################################"
 
 tail -n 1000 -f /var/log/cups/access_log  &
-tail -n 1000 -f /var/log/cups/error_log | jq  --raw-input . &
-echo "-------------" &
+#tail -n 1000 -f /var/log/cups/error_log | jq  --raw-input . &
 cat /var/log/cups/error_log | jq  --raw-input . &
-echo "-------------" &
-tail -n 1000 -f /var/log/cups/page_log  &
+#tail -n 1000 -f /var/log/cups/page_log  &
 for cupspdf_instance in $(env | grep -e "CUPS_PDF_INSTANCE[0-9]\+=" ) ;
 do
     NAME="${cupspdf_instance#*=}"
